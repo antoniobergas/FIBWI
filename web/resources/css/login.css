@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+
+.body{
+  
+}
+.logo{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 8%;
+}
+.panel{
+    width:30%;
+    margin-left:35%;
+}
+.botonLogin{
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    width:100%;
+}

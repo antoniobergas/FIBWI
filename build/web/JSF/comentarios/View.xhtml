@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewComentariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewComentariosLabel_idComentario}"/>
+                    <h:outputText value="#{comentariosController.selected.idComentario}" title="#{bundle.ViewComentariosTitle_idComentario}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_autor}"/>
+                    <h:outputText value="#{comentariosController.selected.autor}" title="#{bundle.ViewComentariosTitle_autor}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_correo}"/>
+                    <h:outputText value="#{comentariosController.selected.correo}" title="#{bundle.ViewComentariosTitle_correo}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_texto}"/>
+                    <h:outputText value="#{comentariosController.selected.texto}" title="#{bundle.ViewComentariosTitle_texto}"/>
+                    <h:outputText value="#{bundle.ViewComentariosLabel_noriciaId}"/>
+                    <h:outputText value="#{comentariosController.selected.noriciaId}" title="#{bundle.ViewComentariosTitle_noriciaId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{comentariosController.destroyAndView}" value="#{bundle.ViewComentariosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewComentariosEditLink}"/>
+                <br />
+                <h:commandLink action="#{comentariosController.prepareCreate}" value="#{bundle.ViewComentariosCreateLink}" />
+                <br />
+                <h:commandLink action="#{comentariosController.prepareList}" value="#{bundle.ViewComentariosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewComentariosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+        <h:outputStylesheet library="css" name="back.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title> Panel Administración</title>
+        <f:event type="preRenderView" listener="#{usuariosController.esAdmin()}" />
+    </h:head>
+    <body>
+
+        <nav id="menuNavegacion" class="navbar navbar-fixed-top">
+            <div class="container container-fluid">
+
+                <div class="navbar-header">
+                    <h:graphicImage
+                        value="${pageContext.request.contextPath}/resources/img/iconos/logo-fibwifibaleares.png"
+                        styleClass="logo-header" />
+                    <br /> <small> panel admin </small>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#menuDesplegable">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button>				
+                </div>
+                <div id="navbar">
+                    <b:row>
+                    <ul class="nav navbar-nav navbar-right navLogout">
+                        <li class="logout-panel-user"><span
+                                class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <h:outputText value="  #{usuariosController.current.idUsuarios}  " />
+                        </li>
+                        <li>
+                            <h:form >
+                                <h:commandLink styleClass="logout-panel" action="#{usuariosController.cerrarSesion()}"><span class="glyphicon glyphicon-log-out"></span></h:commandLink>
+                            </h:form>
+                        </li>
+                    </ul>
+                    </b:row>
+
+                    <ul id="menuDesplegable" class="nav navbar-nav navbarMenu navbar-collapse collapse">
+                        <li><a href="admin.xhtml"><span class="glyphicon glyphicon-list-alt"
+                                                        aria-hidden="true"></span> Noticias <b:badge id="badgeNoticiasPendientes" value="#{noticiasController.listaNoticiasPendientes.size()}" tooltip="noticias por publicar" tooltip-position="top"/> </a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-comment"
+                                             aria-hidden="true"></span> Comentarios</a></li>
+                        <li><h:link outcome="usuarios.xhtml">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</h:link></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="contenedor-general" class="container container-fluid"
+             role="main">
+
+
+            <p:panel id="toggleable" header="[ #{noticiasController.listaNoticiasPendientes.size()} ] Noticias pendientes de publicación" toggleable="true" toggleSpeed="500" collapsed="true" widgetVar="panel" style="margin-bottom:20px">
+
+                <h:form id="formNoticiaspendientes">
+                    <p:dataTable id="dtPendientes" var="noticiaPendiente" value="#{noticiasController.listaNoticiasPendientes}" emptyMessage="No hay noticias pendientes de publicar">
+                        <p:column headerText="Id" visible="false">
+                            <h:outputText value="#{noticiaPendiente.idNoticia}" />
+                        </p:column>
+                        <p:column headerText="Fecha" style="text-align:center" width="auto">
+                            <h:outputText value="#{noticiaPendiente.fecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                        </p:column>
+                        <p:column headerText="Titulo">
+                            <h:outputText value="#{noticiaPendiente.titulo}" style="font-weight:bolder;" />
+                        </p:column>	
+
+                        <p:column headerText="Autor" style="text-align:center">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i><h:outputText value=" #{noticiaPendiente.autorId.idUsuarios}" />
+                        </p:column>	
+
+                        <p:column headerText="Categoria"  style="text-align:center">
+                            <b:label text="default" value="#{noticiaPendiente.categoriaId.nombre}" />
+                        </p:column>	
+
+                        <p:column colspan="2">
+
+                            <h:link styleClass="btn btn-default" value="revisar noticia" outcome="revisarNoticiaAdmin" >
+                                <f:param name="idNoticia" value="#{noticiaPendiente.idNoticia}" />
+                            </h:link>
+
+                            <b:commandButton styleClass="btn btn-primary" value="Publicar"
+                                             style="margin-left:10px;" ajax="true"
+                                             actionListener="#{noticiasController.publicarNoticia(noticiaPendiente.idNoticia)}"
+                                             update="@form formNoticiaspublicadas badgeNoticiasPendientes toggleable">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </b:commandButton>
+                            <b:commandButton value=" eliminar" ajax="true"  style="margin-left: 5px;font-weight: bold;color: #fff;padding: 6px;" styleClass="fa fa-trash btn btn-danger" update="@form badgeNoticiasPendientes toggleable" actionListener="#{noticiasController.eliminarNoticia(noticiaPendiente.idNoticia)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panel>
+
+            <h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> <STRONG>Listado Noticias</STRONG></h3>
+            <h:form id="formNoticiaspublicadas">
+                <p:dataTable id="dtPublicadas" var="noticia" value="#{noticiasController.listaNoticiasPublicadas}"
+                             paginator="true"
+                             rows = "7"
+                             emptyMessage="No hay noticias para mostrar"
+                             >
+                    <p:column headerText="Id" visible="false">
+                        <h:outputText value="#{noticia.idNoticia}" />
+                    </p:column>
+                    <p:column headerText="Fecha" style="text-align:center" width="auto">
+                        <h:outputText value="#{noticia.fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{noticia.titulo}"
+                                      style="font-weight:bolder;" />
+                    </p:column>
+
+                    <p:column headerText="Autor" style="text-align:center">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <h:outputText value=" #{noticia.autorId.idUsuarios}" />
+                    </p:column>
+
+                    <p:column headerText="Categoria" style="text-align:center">
+                        <b:label text="default"
+                                 value="#{noticia.categoriaId.nombre}" />
+                    </p:column>
+
+                    <p:column width="100px">
+
+                        <h:link styleClass="btn btn-default" value="editar noticia"
+                                outcome="revisarNoticiaAdmin">
+
+                            <f:param name="idNoticia" value="#{noticia.idNoticia}" />
+                        </h:link>
+                        <p:commandLink ajax="true"  style="margin-left: 5px;font-weight: bold;color: #fff;padding: 6px;" styleClass="fa fa-trash btn btn-danger" value="  eliminar" update="formNoticiaspublicadas:dtPublicadas,formNoticiaspublicadas:msgNoticiasPublicadas" actionListener="#{noticiasController.eliminarNoticia(noticia.idNoticia)}"
+                                       oncomplete="setTimeout(function() { $('[id$=msgNoticiasPublicadas').hide(1000); }, 2000);"/>
+
+                    </p:column>
+                </p:dataTable>
+                <p:messages id="msgNoticiasPublicadas"/>
+            </h:form>
+        </div>
+        
+        <b:scrollUp distance="200" animation="fade" text="" name="scrollUpCustom" />
+
+        <footer class="container-fluid text-center bg-lightgray">
+
+        </footer>
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </body>
+</html>

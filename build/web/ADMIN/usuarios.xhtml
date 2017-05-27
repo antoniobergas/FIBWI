@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+        <h:outputStylesheet library="css" name="back.css" />
+        <h:outputScript library="js" name="bootstrap.js"></h:outputScript>
+        <f:event type="preRenderView" listener="#{usuariosController.esAdmin()}" />
+    </h:head>
+    <h:body>
+
+        <nav id="menuNavegacion" class="navbar navbar-fixed-top">
+            <div class="container container-fluid">
+
+                <div class="navbar-header">
+                    <h:graphicImage
+                        value="${pageContext.request.contextPath}/resources/img/iconos/logo-fibwifibaleares.png"
+                        styleClass="logo-header" />
+                    <br /> <small> panel admin </small>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#menuDesplegable">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button>				
+                </div>
+                <div id="navbar">
+                    <b:row>
+                        <ul class="nav navbar-nav navbar-right navLogout">
+                            <li class="logout-panel-user"><span
+                                    class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <h:outputText value="  #{usuariosController.current.idUsuarios}  " />
+                            </li>
+                            <li>
+                                <h:form >
+                                    <h:commandLink styleClass="logout-panel" action="#{usuariosController.cerrarSesion()}"><span class="glyphicon glyphicon-log-out"></span></h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </b:row>
+
+                    <ul id="menuDesplegable" class="nav navbar-nav navbarMenu navbar-collapse collapse">
+                        <li><a href="admin.xhtml"><span class="glyphicon glyphicon-list-alt"
+                                                        aria-hidden="true"></span> Noticias <b:badge id="badgeNoticiasPendientes" value="#{noticiasController.listaNoticiasPendientes.size()}" tooltip="noticias por publicar" tooltip-position="top"/> </a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-comment"
+                                             aria-hidden="true"></span> Comentarios</a></li>
+                        <li class="active"><h:link outcome="usuarios.xhtml">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</h:link></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="contenedor-general" class="container container-fluid" role="main">
+
+            <h:panelGrid columns="4"  styleClass="ui-g">
+                <!-- 	formulario para los usuarios-->
+                <h:form id="formUsuario">
+                    <b:panel id="panelFormUsuario" title="Alta/Modificación de usuarios"
+                             col-md="2" style="width:466px" collapsible="false">
+                        <b:label  value="ID" />
+                        <b:inputText id="txtUsuarioID" value="#{usuarioBean.usuario.idUsuarios}"
+                                     required="true"
+                                     requiredMessage="Debe especificar un nombre de usuario" validatorMessage="La ID de usuario es demasiado corta">
+                            <f:validateLength minimum="4" for="txtUsuarioID" />
+                        </b:inputText>
+                        <b:label  value="Firma" />
+                        <b:message for="@previous"/>
+                        <b:inputText id="txtFirmausuario" value="#{usuarioBean.usuario.firma}" validatorMessage="El formato de la firma es incorrecto">
+                            <f:validateRegex pattern=".*\S.*" />
+                        </b:inputText>                                        
+                        <b:label  value="Email" />
+                        <b:message for="@previous"/>
+                        <b:inputText id="txtUsuarioEmail" value="#{usuarioBean.usuario.email}">
+                        </b:inputText>
+                        <b:label  value="Contraseña" />
+                        <b:message for="@previous"/>
+                        <b:inputText id="txtpUsuario" value="#{usuarioBean.usuario.password}">
+                        </b:inputText>  
+                        <b:message for="@previous"/>
+                        <b:selectOneMenu id="selectRol"
+                                         value="#{usuarioBean.rolUsuarioSeleccionado}"  required="true" requiredMessage="debe seleccionar un rol">
+                            <f:selectItem itemLabel="Seleccione Rol" noSelectionOption="true"
+                                          itemValue="" />
+                            <f:selectItems value="#{usuarioBean.listaRoles}" var="rol"
+                                           itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}"/>
+                        </b:selectOneMenu>
+
+                        <p:commandButton value="enviar" styleClass="btn btn-success"
+                                         icon="ui-icon-plus"
+                                         actionListener="#{usuarioBean.modificarUsuario}" ajax="true"
+                                         update="formUsuarios:dataTableUsuarios formUsuario:menUsuario @form" oncomplete="setTimeout(function() { $('[id$=menUsuario').hide(1000); }, 2000);"/>
+
+
+                        <p:commandButton value="limpiar" styleClass="btn btn-info"
+                                         icon="ui-icon-close" process="@this"
+                                         actionListener="#{usuarioBean.resetearFormulario()}"
+                                         update="formUsuarios:dataTableUsuarios @form" />
+
+
+                    </b:panel>
+                    <p:messages id="menUsuario"/>
+                </h:form>
+                <!-- 	formulario para los roles-->
+                <b:form id="formRoles">
+                    <b:panel id="panelFormRoles" title="Alta/Modificación de Roles"
+                             col-md="2" style="margin-left:20px;width:446px" collapsible="false">
+
+                        <b:selectOneMenu id="selectRolModificar" value="#{rolesController.current.idRol}">
+                            <f:selectItem itemLabel="Seleccione Rol" noSelectionOption="true"
+                                          itemValue="0" />
+                            <f:selectItems value="#{rolesController.listaRoles}" var="rol"
+                                           itemValue="#{rol.idRol}" itemLabel="#{rol.nombre}" />
+                            <f:ajax listener="#{rolesController.seleccionarRol()}"  render="formRoles:txtNombreRol" />
+                        </b:selectOneMenu>
+
+                        <b:label  value="Nombre" />
+                        <b:inputText id="txtNombreRol" required="true" requiredMessage="Rellena el campo nombre para realizar la acción"
+                                     value="#{rolesController.current.nombre}"  validatorMessage="los nombres para roles solo permiten caracteres alfanuméricos">
+                            <f:validateRegex pattern="([A-Za-z0-9])\w+"/>
+                        </b:inputText>
+
+                        <p:commandButton value="enviar" styleClass="btn btn-success"
+                                         icon="fa fa-plus" process="@form"
+                                         actionListener="#{rolesController.modificarRoles()}"
+                                         update="@form formUsuario:selectRol formRoles:menFormRoles"  oncomplete="setTimeout(function() { $('[id$=menFormRoles]').hide(1000); }, 2000);" />
+
+                        <p:commandButton value="Eliminar" icon="fa fa-trash-o"
+                                         styleClass="btn btn-danger"
+                                         actionListener="#{rolesController.eliminarRol}"
+                                         update="@form formUsuario:selectRol formRoles:menFormRoles" oncomplete="setTimeout(function() { $('[id$=menFormRoles]').hide(1000); }, 2000);">
+                            <p:confirm header="Eliminar rol" message="¿ Está seguro ?"
+                                       icon="ui-icon-alert"/>
+                        </p:commandButton>	
+
+                    </b:panel>
+                    <p:messages id="menFormRoles" />
+                </b:form>
+            </h:panelGrid>
+
+
+            <br />
+
+            <h:form id="formUsuarios">
+                <p:messages id="menTablaUsuarios"/>
+
+                <p:dialog header="Eliminar usuario" widgetVar="dialogEliminarUsuario" modal="true"
+                          height="100">
+                    <h:outputText value="¿ Desea eliminar al usuario #{usuarioBean.usuarioSeleccionado} ?" />
+                </p:dialog>
+
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sí" type="button"
+                                     styleClass="ui-confirmdialog-yes btn-danger" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+                <p:dataTable id="dataTableUsuarios"
+                             value="#{usuarioBean.listaUsuarios}" var="usuario"
+                             paginator="true" paginatorAlwaysVisible="false" selectionMode="single" selection="#{usuarioBean.usuarioSeleccionado}"
+                             rowKey="#{usuario.idUsuarios}">
+
+                    <p:ajax event="rowSelect"
+                            listener="#{usuarioBean.seleccionarRegistro}" update="formUsuario"/>
+
+                    <p:column colspan="1">
+                        <h:outputText value="#{usuario.idUsuarios}" />
+                    </p:column>
+                    <p:column colspan="1">
+                        <h:outputText styleClass="label label-#{usuario.rolId.nombre}" style="margin-left:10px;" value="#{usuario.rolId.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="Firma">
+                        <h:outputText value="#{usuario.firma}" />
+                    </p:column>  
+                    <p:column headerText="Email">
+                        <h:outputText value="#{usuario.email}" />
+                    </p:column>                               
+
+                    <p:column>
+
+                        <p:commandButton value="Editar" icon="fa fa-edit" styleClass="btn btn-info btnEliminarUsuario" ajax="true"
+                                         process="@this" actionListener="#{usuarioBean.editarUsuario()}"
+                                         update="formUsuario">
+                        </p:commandButton>                                      
+                        <p:commandButton value="Eliminar" icon="fa fa-trash-o"
+                                         styleClass="btn btn-warning btnEliminarUsuario"
+                                         actionListener="#{usuarioBean.eliminarUsuario()}"
+                                         update="formUsuarios:dataTableUsuarios formUsuarios:menTablaUsuarios @form"  oncomplete="setTimeout(function() { $('[id$=menTablaUsuarios]').hide(1000); }, 2000);">
+                            <p:confirm header="Eliminar usuario" message="¿ Está seguro ?"
+                                       icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+        <b:scrollUp distance="200" animation="fade" text="" name="scrollUpCustom" />
+       
+        <footer class="container-fluid text-center bg-lightgray">
+            
+        </footer>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    </h:body>
+</html>
+

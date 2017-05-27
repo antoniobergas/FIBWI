@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta property="og:url"                content="https://www.google.es/?gws_rd=ssl" />
+        <meta property="og:type"               content="article" />
+        <meta property="og:title"              content="FibwiRadio noticias" />
+        <meta property="og:description"        content="Noticias actuales de baleares." />
+        <meta property="og:image"              content="/resources/img/iconos/icono.png" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FibwiRadio - Noticias</title>
+
+        <!-- Bootstrap Core CSS -->
+
+
+        <link
+            href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+            rel="stylesheet" />
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+
+
+        <!-- Custom CSS -->
+        <h:outputStylesheet library="css" name="front.css"></h:outputStylesheet>
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </h:head>
+
+    <body>
+       
+
+        <!-- Navigation -->
+        <nav id="barranav" class="navbar navbar-inverse navbar-fixed-top"
+             role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <h:form>
+                        <h:button  class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"><a href="https://www.facebook.com/fibwir/?hc_ref=SEARCH"><i class="fa fa-facebook"
+                                                         aria-hidden="true"></i> </a> </span>
+                            <span class="icon-bar"><a href="https://twitter.com/fibwiradio"><i class="fa fa-twitter"
+                                    aria-hidden="true"><script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script></i> </a> </span>
+                            <span class="icon-bar"><a><i class="fa fa-envelope"
+                                                         aria-hidden="true"></i></a> </span>
+                            <span class="icon-bar"><a href="https://www.instagram.com/fibwi/"><i class="fa fa-instagram"
+                                                         aria-hidden="true"></i></a> </span>
+                            <span class="icon-bar"><a href="https://www.youtube.com/channel/UCgNtxbq6ffbgcTyV0U4Jimg"><i class="fa fa-youtube-play"
+                                                         aria-hidden="true"></i></a> </span>
+                        </h:button>
+                    </h:form>
+                    <a class="navbar-brand logonav cabecerabrand" href="#"><h:graphicImage id="logo" style="margin-left:60px;"
+                                                                                           value="/resources/img/iconos/admin-ajax.php-copia.png" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse"
+                     id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" id="botones">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Configuración</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <h:inputHidden value="#{noticiasController.noticiaPorId(param['idNoticia'])}"/>
+        <h:inputHidden value="#{noticiasController.ejbFacadeNoticias.sumarVisitas(param['idNoticia'])}"/>
+        <i id="ir-arriba" class="  icon-arrow-up"></i>
+        <!-- Page Content -->
+        <div class="container">
+            <div id="imagenNoticia">
+                <h:graphicImage styleClass="noticiaidim" value="/resources/img/imagenes/#{noticiasController.current.fotos}"></h:graphicImage>
+            </div>
+            <div class="row">
+
+                <!-- Noticias principal -->
+                <div class="col-md-8">
+
+                    <f:metadata>
+                        <f:viewParam name="idNoticia" value="#{noticiasController.idLeerNoticia}"/>
+                    </f:metadata>
+
+                    <h1 class="page-header">#{noticiasController.current.titulo}</h1>
+
+
+                    <div>
+
+
+                        <strong><h:outputText value="#{noticiasController.current.autorId.firma}" /></strong>
+                        <h:outputText styleClass="fechanoticia" value="#{noticiasController.current.fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+
+                        <div class="fb-share-button" data-href="http://localhost:8080/FIBWI/faces/FRONT/front.xhtml" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2FFIBWI%2Ffaces%2FFRONT%2Ffront.xhtml&amp;src=sdkpreparse">Compartir</a></div>
+                        <div>
+                            <h:outputText value="#{noticiasController.current.texto}" escape="false"/>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Pager -->
+                    <ul class="pager">
+                        <li class="previous"><a href="#">Anterior</a></li>
+                        <li class="next"><a href="#">Siguiente</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-4" id="widgets">
+
+                    <!-- Blog Search Well -->
+                    <div class="well">
+                        <h4>Búsqueda</h4>
+                        <p:commandButton styleClass="busqueda" icon="fa fa-search"></p:commandButton>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" /> 
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- Blog Categories Well -->
+                    <div class="well">
+                        <h4>Categorías</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Música</a></li>
+                                    <li><a href="#">Deportes</a></li>
+                                    <li><a href="#">Cultura</a></li>
+                                    <li><a href="#">Social</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Ocio</a></li>
+                                    <li><a href="#">Sucesos</a></li>
+                                    <li><a href="#">Actualidad</a></li>
+                                    <li><a href="#">Eventos</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.col-lg-6 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                    <!-- Side Widget Well -->
+                    <div class="well">
+                        <h:graphicImage styleClass="imagenwidget"
+                                        value="/resources/img/imagenes/#{
+                                        noticiasController.getNoticias(10).fotos}" />
+                        <h3>
+                            <h:outputLink value="#{
+                                          noticiasController.getNoticias(10).titulo}"></h:outputLink>
+                        </h3>
+                        <h:graphicImage styleClass="imagenwidget"
+                                        value="/resources/img/imagenes/#{
+                                        noticiasController.getNoticias(9).fotos}" />
+                        <h3>
+                            <h:outputLink value="#{
+                                          noticiasController.getNoticias(9).titulo}"></h:outputLink>
+                        </h3>
+                        <h:graphicImage styleClass="imagenwidget"
+                                        value="/resources/img/imagenes/#{
+                                        noticiasController.getNoticias(8).fotos}" />
+                        <h3>
+                            <h:outputLink value="#{
+                                          noticiasController.getNoticias(8).titulo}"></h:outputLink>
+                        </h3>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+            <hr />
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12"></div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </footer>
+
+        </div>
+        <nav id="barradown" class="navbar navbar-inverse" role="navigation">
+            <div class="container" id="botonessociales">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header" >
+                    <h:button  class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"><a href="https://www.facebook.com/fibwir/?hc_ref=SEARCH">Facebook   <i class="fa fa-facebook"
+                                                                                                                      aria-hidden="true"></i> </a> </span>
+                        <span class="icon-bar"><a href="https://twitter.com/fibwiradio">Twitter    <i class="fa fa-twitter"
+                                                                                                      aria-hidden="true"></i> </a> </span>
+                        <span class="icon-bar"><a>Mail    <i class="fa fa-envelope"
+                                                             aria-hidden="true"></i></a> </span>
+                        <span class="icon-bar"><a href="https://www.instagram.com/fibwi/">Instagram    <i class="fa fa-instagram"
+                                                                                                          aria-hidden="true"></i></a> </span>
+                        <span class="icon-bar"><a href="https://www.youtube.com/channel/UCgNtxbq6ffbgcTyV0U4Jimg">Youtube    <i class="fa fa-youtube-play"
+                                                                                                                                aria-hidden="true"></i></a> </span>
+                    </h:button>
+
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- /.container -->
+
+        <!-- jQuery -->
+        <h:outputScript library="js" name="jquery.js"></h:outputScript>
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#ir-arriba').click(function () {
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 300);
+                });
+
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 0) {
+                        $('#ir-arriba').slideDown(300);
+                    } else {
+                        $('#ir-arriba').slideUp(300);
+                    }
+                });
+
+            });
+
+
+
+
+        </script>
+
+    </body>
+
+</html>

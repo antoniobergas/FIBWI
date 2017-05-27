@@ -1,0 +1,1 @@
+ejbs.NoticiasFacadeLocal

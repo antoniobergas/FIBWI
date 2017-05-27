@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+        <h:outputStylesheet library="css" name="back.css" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <f:event type="preRenderView" listener="#{usuariosController.esAdmin()}" />
+        <f:metadata>
+            <f:viewParam id="idNoticia" name="idNoticia" value="#{noticiasController.idNoticiaRevisar}" />
+        </f:metadata>
+    </h:head>
+    <body>
+
+        <nav id="menuNavegacion" class="navbar navbar-fixed-top">
+            <div class="container container-fluid">
+
+                <div class="navbar-header">
+                    <h:graphicImage
+                        value="${pageContext.request.contextPath}/resources/img/iconos/logo-fibwifibaleares.png"
+                        styleClass="logo-header" />
+                    <br /> <small> panel admin </small>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#menuDesplegable">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button>				
+                </div>
+                <div id="navbar">
+                    <b:row>
+                    <ul class="nav navbar-nav navbar-right navLogout">
+                        <li class="logout-panel-user"><span
+                                class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <h:outputText value="  #{usuariosController.current.idUsuarios}  " />
+                        </li>
+                        <li>
+                            <h:form >
+                                <h:commandLink styleClass="logout-panel" action="#{usuariosController.cerrarSesion()}"><span class="glyphicon glyphicon-log-out"></span></h:commandLink>
+                            </h:form>
+                        </li>
+                    </ul>
+                    </b:row>
+
+                    <ul id="menuDesplegable" class="nav navbar-nav navbarMenu navbar-collapse collapse">
+                        <li><a href="admin.xhtml"><span class="glyphicon glyphicon-list-alt"
+                                                        aria-hidden="true"></span> Noticias <b:badge id="badgeNoticiasPendientes" value="#{noticiasController.listaNoticiasPendientes.size()}" tooltip="noticias por publicar" tooltip-position="top"/> </a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-comment"
+                                             aria-hidden="true"></span> Comentarios</a></li>
+                        <li><h:link outcome="usuarios.xhtml">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuarios</h:link></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h:form>
+            <h:inputHidden value="#{noticiasController.noticiaById()}"></h:inputHidden>
+            <div id="contenedor-general" class="container container-fluid"
+                 role="main">
+
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="admin.xhtml">Noticias</a></li>
+                    <li class="breadcrumb-item"><strong><h:outputText value="#{noticiasController.current.titulo}" /></strong></li>
+                </ol>
+                <h2>
+                    <h:outputText value="#{noticiasController.current.titulo}" /></h2>
+                <i class="fa fa-calendar-o" aria-hidden="true"></i><h:outputText style="margin-left:10px" value="#{noticiasController.current.fecha}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText><br/>
+                <p:row><i class="fa fa-user" aria-hidden="true"></i> <h:outputLabel style="margin-left: 10px; margin-bottom:10px;" value="#{noticiasController.current.autorId.firma}" /> </p:row>
+                <p:textEditor value="#{noticiasController.current.texto}">
+
+                </p:textEditor>
+                <h:form>
+                    <b:commandButton styleClass="btn btn-primary" value="editar"
+                                     style="margin-left:10px;" ajax="false"
+                                     action="#{noticiasController.editarNoticia()}"
+                                     update="@form">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                    </b:commandButton>
+                </h:form>     
+            </div>
+ 
+        </h:form>
+
+        <b:scrollUp distance="200" animation="fade" text="" name="scrollUpCustom" />
+
+        <footer class="container-fluid text-center bg-lightgray">
+
+        </footer>        
+    </body> 
+</html>

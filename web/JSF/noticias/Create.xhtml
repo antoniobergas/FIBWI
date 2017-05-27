@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateNoticiasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_idNoticia}" for="idNoticia" />
+                    <h:inputText id="idNoticia" value="#{noticiasController.selected.idNoticia}" title="#{bundle.CreateNoticiasTitle_idNoticia}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_idNoticia}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_titulo}" for="titulo" />
+                    <h:inputText id="titulo" value="#{noticiasController.selected.titulo}" title="#{bundle.CreateNoticiasTitle_titulo}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_texto}" for="texto" />
+                    <h:inputText id="texto" value="#{noticiasController.selected.texto}" title="#{bundle.CreateNoticiasTitle_texto}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_texto}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_etiquetas}" for="etiquetas" />
+                    <h:inputText id="etiquetas" value="#{noticiasController.selected.etiquetas}" title="#{bundle.CreateNoticiasTitle_etiquetas}" />
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_fotos}" for="fotos" />
+                    <h:inputText id="fotos" value="#{noticiasController.selected.fotos}" title="#{bundle.CreateNoticiasTitle_fotos}" />
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_visitas}" for="visitas" />
+                    <h:inputText id="visitas" value="#{noticiasController.selected.visitas}" title="#{bundle.CreateNoticiasTitle_visitas}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_visitas}"/>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{noticiasController.selected.fecha}" title="#{bundle.CreateNoticiasTitle_fecha}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_publicada}" for="publicada" />
+                    <h:inputText id="publicada" value="#{noticiasController.selected.publicada}" title="#{bundle.CreateNoticiasTitle_publicada}" />
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_categoriaId}" for="categoriaId" />
+                    <h:selectOneMenu id="categoriaId" value="#{noticiasController.selected.categoriaId}" title="#{bundle.CreateNoticiasTitle_categoriaId}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_categoriaId}">
+                        <f:selectItems value="#{categoriasController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateNoticiasLabel_autorId}" for="autorId" />
+                    <h:selectOneMenu id="autorId" value="#{noticiasController.selected.autorId}" title="#{bundle.CreateNoticiasTitle_autorId}" required="true" requiredMessage="#{bundle.CreateNoticiasRequiredMessage_autorId}">
+                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{noticiasController.create}" value="#{bundle.CreateNoticiasSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{noticiasController.prepareList}" value="#{bundle.CreateNoticiasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateNoticiasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+
+.editor{
+    width:900px;
+    height:300px;
+}
+
+.fileupload{
+    width:300px;
+}
+.navbar{
+
+    color:#FFFFFF !important;
+}
+.logo{
+    display: flex;
+    position: relative;
+    top: 40px;
+    left: 115px;
+    padding-left: 115px;
+}
+body{
+    margin-left: 8%; 
+    margin-right: 8%;
+}
+.menu{
+    margin-top: 10px;
+    display:flex;
+    position:relative;
+    float:right;
+    margin-right:225px;
+}
+.cajaprincipal{
+    position: relative;
+    margin-left: 10px; 
+    margin-top: 60px;
+    align-content: center;
+    display:flex;
+    justify-content: center;
+}
+.panel{
+    margin-bottom:10px;
+}
+.select{
+    width:125px;
+}
+.texto{
+    margin-bottom:10px; width:900px;height:300px;
+}
+.borrar{
+    top:25px;
+}
+.registro{
+    width:100%; padding: 6px 9px;
+}
+.body{
+    background-color: #C1BBBA  ;
+}

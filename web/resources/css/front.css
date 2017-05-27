@@ -1,0 +1,216 @@
+/*!
+ * Start Bootstrap - Blog Home (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+body {
+    padding-top: 70px;
+    /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+footer {
+    margin: 50px 0;
+}
+
+#tiovivo {
+    width: 60%;
+    height: 30%;
+    margin-top: 150px;
+}
+
+#barranav {
+    margin-left: 7%;
+    margin-right: 7%;
+    height: 15%;
+    background: linear-gradient(to top, #FFFFFF 80%, #2ba9db 20%);
+    -webkit-box-shadow: 0px 10px 8px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 10px 8px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 10px 8px -4px rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+#widgets {
+    margin-bottom: 40%;
+    display: flex;
+    flex-direction: column;
+    bottom: 343px;
+}
+
+.imagenprincipal {
+    width: 50%;
+}
+
+.imagenwidget {
+    width: 100%;
+    height: 30%;
+}
+
+#logo {
+    margin-top: 5%;
+    position: relative;
+}
+
+#botones {
+    margin-top: 44px;
+    position:relative;
+    right:200px;
+
+}
+
+.hoverbotones:hover {
+    border-bottom: 5px solid #2ba9db;
+    background-color: #fff !important;
+}
+
+.nav navbar-nav>li {
+    height: 61px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    aling-content: center;
+}
+
+.imagenslider {
+    width: 800px;
+    height: 400px;
+}
+
+.datoprincipal {
+    display: flex;
+    margin-top: 5%;
+}
+
+.firma:link {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.firma {
+    color: black;
+    display: inline-flex;
+}
+
+
+
+.cajadatos {
+    margin-left: 2%;
+    width: 60%;
+}
+
+.espacio1 {
+    width: 100%;
+
+    position: relative;
+    border-color: rgba(0,0,0,0.3);
+}
+
+.espacio2 {
+    width: 100%;
+
+    position: relative;
+    border-color: rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.texto {
+    position: relative;
+
+}
+
+#ir-arriba {
+    display: none;
+    padding: 20px;
+    background: #2ba9db;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 2px;
+    height: 3%;
+    width: 3%;
+}
+
+.icon-arrow-up::before {
+    position: relative;
+    bottom: 15px;
+    right: 13px;
+}
+
+.nav navbar-nav>li>a {
+    color: #000;
+}
+
+.nav navbar-nav>li>a:hover {
+    color: #000;
+}
+
+.navbar-header {
+    display: flex;
+}
+
+.navbar-toggle {
+    position: relative;
+    left: 50px;
+}
+
+.icon-bar {
+    margin-right: 30px;
+}
+
+#barradown {
+    background-color: #2ba9db;
+    border: none;
+    margin-left: 90px;
+    margin-right: 90px;
+    margin-bottom: 0px;
+    height: 100px;
+}
+
+#botonessociales {
+    display: flex;
+    position:relative;
+    justify-content: center;
+    align-content: center;
+    top: 40px;
+}
+.leer{
+    display:inline-flex;
+    position:relative;
+    float:right;
+    bottom:2%;
+}
+.busqueda{
+    position:relative;
+    float:right;
+
+    right:30%;
+    height: 47%;
+
+}
+.fecha {
+    color: black;
+    display: inline-flex;
+    margin-left: 6%;
+
+}
+.logonav{
+    position: relative;
+    right: 200px;
+}
+.fechanoticia{
+    margin-left: 5%;
+}
+.cabecerabrand{
+    margin-top: 15px;
+}
+#imagenNoticia{
+     width: 60%;
+    height: 30%;
+    margin-top: 150px;
+}
+.noticiaidim{
+    width:750px;
+    height:400px;
+}

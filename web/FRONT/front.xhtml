@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>FibwiRadio - Noticias</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400"/>
+        <h:outputStylesheet library="css" name="normalize.css"></h:outputStylesheet>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <h:outputScript library="js" name="tipuesearch_content.js"></h:outputScript>
+
+        <h:outputScript library="js" name="tipuesearch_set.js"></h:outputScript>
+        <h:outputScript library="js" name="tipuesearch.min.js"></h:outputScript>
+        <h:outputStylesheet library="css" name="tipuesearch.css"></h:outputStylesheet>
+        <link
+            href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+            rel="stylesheet" />
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+
+
+        <!-- Custom CSS -->
+        <h:outputStylesheet library="css" name="front.css"></h:outputStylesheet>
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </h:head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav id="barranav" class="navbar navbar-inverse navbar-fixed-top"
+             role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <h:form>
+                        <h:button  class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"><a href="https://www.facebook.com/fibwir/?hc_ref=SEARCH"><i class="fa fa-facebook"
+                                                         aria-hidden="true"></i> </a> </span>
+                            <span class="icon-bar"><a href="https://twitter.com/fibwiradio"><i class="fa fa-twitter"
+                                    aria-hidden="true"><script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script></i> </a> </span>
+                            <span class="icon-bar"><a><i class="fa fa-envelope"
+                                                         aria-hidden="true"></i></a> </span>
+                            <span class="icon-bar"><a href="https://www.instagram.com/fibwi/"><i class="fa fa-instagram"
+                                                         aria-hidden="true"></i></a> </span>
+                            <span class="icon-bar"><a href="https://www.youtube.com/channel/UCgNtxbq6ffbgcTyV0U4Jimg"><i class="fa fa-youtube-play"
+                                                         aria-hidden="true"></i></a> </span>
+                        </h:button>
+                    </h:form>
+                    <a class="navbar-brand logonav cabecerabrand" href="#"><h:graphicImage id="logo" value="/resources/img/iconos/admin-ajax.php-copia.png" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse"
+                     id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" id="botones">
+                        <li class="hoverbotones"><a href="#">Home</a></li>
+                        <li class="hoverbotones"><a href="#">Noticias</a></li>
+                        <li class="hoverbotones"><a href="#">Categorías</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <i id="ir-arriba" class="  icon-arrow-up"></i>
+        <!-- Page Content -->
+        <div class="container">
+            <b:carousel id="tiovivo" interval="4000">
+                <b:carouselItem caption="#{noticiasController.datosNoticias(1, 'titulo')}">
+                    <h:graphicImage styleClass="imagenslider"
+                                    value="#{pageContext.request.contextPath}/resources/img/imagenes/#{noticiasController.datosNoticias(1, 'foto')}" />
+
+                </b:carouselItem>
+                <b:carouselItem caption="#{noticiasController.datosNoticias(2, 'titulo')}">
+                    <h:graphicImage styleClass="imagenslider"
+                                    value="#{pageContext.request.contextPath}/resources/img/imagenes/#{noticiasController.datosNoticias(2, 'foto')}" />
+                </b:carouselItem>
+                <b:carouselItem caption="#{noticiasController.datosNoticias(3, 'titulo')}">
+                    <h:graphicImage styleClass="imagenslider"
+                                    value="#{pageContext.request.contextPath}/resources/img/imagenes/#{noticiasController.datosNoticias(3, 'foto')}" />
+                </b:carouselItem>
+                <b:carouselItem caption="#{noticiasController.datosNoticias(4, 'titulo')}">
+                    <h:graphicImage styleClass="imagenslider"
+                                    value="#{pageContext.request.contextPath}/resources/img/imagenes/#{noticiasController.datosNoticias(4, 'foto')}" />
+                </b:carouselItem>
+                <b:carouselItem caption="#{noticiasController.datosNoticias(5, 'titulo')}">
+                    <h:graphicImage styleClass="imagenslider"
+                                    value="#{pageContext.request.contextPath}/resources/img/imagenes/#{noticiasController.datosNoticias(5, 'foto')}" />
+                </b:carouselItem>
+            </b:carousel>
+
+            <div class="row">
+
+                <!-- Noticias principal -->
+                <div class="col-md-8">
+
+                    <h1 class="page-header">Últimas Noticias</h1>
+                    <div class="datoprincipal">
+                        <!-- Primera noticia -->
+                        <h:graphicImage class="imagenprincipal"
+                                        value="/resources/img/imagenes/#{noticiasController.datosNoticias(1, 'foto')}" />
+
+                        <div class="cajadatos">
+                            <h4>
+                                <a href="#">#{
+                                    noticiasController.datosNoticias(1,'titulo')}</a>
+                            </h4>
+                            <hr class="espacio1" />
+                            <p class="texto"><h:outputText value="#{
+                                                           noticiasController.datosNoticias(1, 'texto')}..." escape="false"/></p>
+                            <hr class="espacio2" />
+
+                            <p class="firma">
+                                <a class="firma" href="index.php">#{noticiasController.datosNoticias(1, 'firma')}</a>
+                            </p>
+                            <p class="fecha">
+
+                                <h:outputText value="#{
+                                              noticiasController.fechaNoticia(1)}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+
+                                </h:outputText>
+                            </p>
+                            <h:form styleClass="leer">
+                                <h:link styleClass="btn btn-info" value="Leer más" outcome="leerNoticia">
+                                    <f:param name="idNoticia" value="#{noticiasController.idNoticia(1)}"/>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </h:link>
+                            </h:form>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="datoprincipal">
+                        <!-- Segunda noticia -->
+                        <h:graphicImage class="imagenprincipal"
+                                        value="/resources/img/imagenes/#{noticiasController.datosNoticias(2, 'foto')}" />
+
+                        <div class="cajadatos">
+                            <h4>
+                                <a href="#">#{
+                                    noticiasController.datosNoticias(2,'titulo')}</a>
+                            </h4>
+                            <hr class="espacio1" />
+                            <p class="texto">#{
+                                noticiasController.datosNoticias(2, 'texto')}...</p>
+                            <hr class="espacio2" />
+
+                            <p class="firma">
+                                <a class="firma" href="index.php">#{noticiasController.datosNoticias(2, 'firma')}</a>
+                            </p>
+                            <p class="fecha">
+
+                                <h:outputText value="#{
+                                              noticiasController.fechaNoticia(2)}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+
+                                </h:outputText>
+                            </p>
+                            <h:form styleClass="leer">
+                                <h:link styleClass="btn btn-info" value="Leer más" outcome="leerNoticia">
+                                    <f:param name="idNoticia" value="#{noticiasController.idNoticia(2)}"/>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </h:link>
+                            </h:form>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="datoprincipal">
+                        <!--Tercera noticia -->
+                        <h:graphicImage class="imagenprincipal"
+                                        value="/resources/img/imagenes/#{noticiasController.datosNoticias(3, 'foto')}" />
+
+                        <div class="cajadatos">
+                            <h4>
+                                <a href="#">#{
+                                    noticiasController.datosNoticias(3,'titulo')}</a>
+                            </h4>
+                            <hr class="espacio1" />
+                            <p class="texto">#{
+                                noticiasController.datosNoticias(3, 'texto')}...</p>
+                            <hr class="espacio2" />
+
+                            <p class="firma">
+                                <a class="firma" href="index.php">#{noticiasController.datosNoticias(3, 'firma')}</a>
+                            </p>
+                            <p class="fecha">
+
+                                <h:outputText value="#{
+                                              noticiasController.fechaNoticia(3)}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+
+                                </h:outputText>
+                            </p>
+                            <h:form styleClass="leer">
+                                <h:link styleClass="btn btn-info" value="Leer más" outcome="leerNoticia">
+                                    <f:param name="idNoticia" value="#{noticiasController.idNoticia(3)}"/>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </h:link>
+                            </h:form>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="datoprincipal">
+                        <!-- Cuarta noticia -->
+                        <h:graphicImage class="imagenprincipal"
+                                        value="/resources/img/imagenes/#{noticiasController.datosNoticias(4, 'foto')}" />
+
+                        <div class="cajadatos">
+                            <h4>
+                                <a href="#">#{
+                                    noticiasController.datosNoticias(4,'titulo')}</a>
+                            </h4>
+                            <hr class="espacio1" />
+                            <p class="texto">#{
+                                noticiasController.datosNoticias(4, 'texto')}...</p>
+                            <hr class="espacio2" />
+
+                            <p class="firma">
+                                <a class="firma" href="index.php">#{noticiasController.datosNoticias(4, 'firma')}</a>
+                            </p>
+                            <p class="fecha">
+
+                                <h:outputText value="#{noticiasController.fechaNoticia(4)}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+
+                                </h:outputText>
+                            </p>
+                            <h:form styleClass="leer">
+                                <h:link styleClass="btn btn-info" value="Leer más" outcome="leerNoticia">
+                                    <f:param name="idNoticia" value="#{noticiasController.idNoticia(4)}"/>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </h:link>
+                            </h:form>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="datoprincipal">
+                        <!-- Quinta noticia -->
+                        <h:graphicImage class="imagenprincipal"
+                                        value="/resources/img/imagenes/#{noticiasController.datosNoticias(5, 'foto')}" />
+
+                        <div class="cajadatos">
+                            <h4>
+                                <a href="#">#{
+                                    noticiasController.datosNoticias(5,'titulo')}</a>
+                            </h4>
+                            <hr class="espacio1" />
+                            <p class="texto">#{
+                                noticiasController.datosNoticias(5, 'texto')}...</p>
+                            <hr class="espacio2" />
+
+                            <p class="firma">
+                                <a class="firma" href="index.php">#{noticiasController.datosNoticias(5, 'firma')}</a>
+                            </p>
+                            <p class="fecha">
+
+                                <h:outputText value="#{
+                                              noticiasController.fechaNoticia(5)}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+
+                                </h:outputText>
+                            </p>
+
+                            <h:form styleClass="leer">
+                                <h:link styleClass="btn btn-info" value="Leer más" outcome="leerNoticia">
+                                    <f:param name="idNoticia" value="#{noticiasController.idNoticia(5)}"/>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </h:link>
+                            </h:form>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="datoprincipal">
+                        <!-- Primera noticia -->
+                        <h:graphicImage class="imagenprincipal"
+                                        value="/resources/img/imagenes/#{noticiasController.datosNoticias(6, 'foto')}" />
+
+                        <div class="cajadatos">
+                            <h4>
+                                <a href="#">#{
+                                    noticiasController.datosNoticias(6,'titulo')}</a>
+                            </h4>
+                            <hr class="espacio1" />
+                            <p class="texto">#{
+                                noticiasController.datosNoticias(6, 'texto')}...</p>
+                            <hr class="espacio2" />
+
+                            <p class="firma">
+                                <a class="firma" href="index.php">#{noticiasController.datosNoticias(6, 'firma')}</a>
+                            </p>
+                            <p class="fecha">
+
+                                <h:outputText value="#{
+                                              noticiasController.fechaNoticia(6)}"><f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+
+                                </h:outputText>
+                            </p>
+
+                            <h:form styleClass="leer">
+                                <h:link styleClass="btn btn-info " value="Leer más" outcome="leerNoticia">
+                                    <f:param name="idNoticia" value="#{noticiasController.idNoticia(6)}"/>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </h:link>
+                            </h:form>
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <!-- Pager -->
+                    <ul class="pager">
+                        <li class="previous"><a href="#">Anterior</a></li>
+                        <li class="next"><a href="#">Siguiente</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-4" id="widgets">
+
+                    <!-- Blog Search Well -->
+                    <div class="well ">
+
+                        <h4>Búsqueda</h4>
+
+                        <p:commandButton action="#{noticiasController.busquedaNoticia()}" styleClass="busqueda" icon="fa fa-search"></p:commandButton >
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" /> 
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Blog Categories Well -->
+                    <div class="well">
+                        <h4>Categorías</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Música</a></li>
+                                    <li><a href="#">Deportes</a></li>
+                                    <li><a href="#">Cultura</a></li>
+                                    <li><a href="#">Social</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Ocio</a></li>
+                                    <li><a href="#">Sucesos</a></li>
+                                    <li><a href="#">Actualidad</a></li>
+                                    <li><a href="#">Eventos</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.col-lg-6 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                    <!-- Side Widget Well -->
+                    <div class="well">
+                        <h:graphicImage styleClass="imagenwidget"
+                                        value="/resources/img/imagenes/#{noticiasController.noticiasVistas(0, 'foto')}" />
+                        <h3>
+                            <h:outputLink value="#{noticiasController.noticiasVistas(0, 'titulo')}"></h:outputLink>
+                        </h3>
+                        <h:graphicImage styleClass="imagenwidget"
+                                        value="/resources/img/imagenes/#{noticiasController.noticiasVistas(1, 'foto')}" />
+                        <h3>
+                            <h:outputLink value="#{noticiasController.noticiasVistas(1, 'titulo')}"></h:outputLink>
+                        </h3>
+                        <h:graphicImage styleClass="imagenwidget"
+                                        value="/resources/img/imagenes/#{noticiasController.noticiasVistas(2, 'foto')}" />
+                        <h3>
+                            <h:outputLink value="#{noticiasController.noticiasVistas(1, 'titulo')}"></h:outputLink>
+                        </h3>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+
+            <hr />
+
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12"></div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </footer>
+
+        </div>
+        <nav id="barradown" class="navbar navbar-inverse" role="navigation">
+            <div class="container" id="botonessociales">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header" >
+                    <h:button  class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"><a href="https://www.facebook.com/fibwir/?hc_ref=SEARCH">Facebook   <i class="fa fa-facebook"
+                                                                aria-hidden="true"></i> </a> </span>
+                        <span class="icon-bar"><a href="https://twitter.com/fibwiradio">Twitter    <i class="fa fa-twitter"
+                                                                aria-hidden="true"></i> </a> </span>
+                        <span class="icon-bar"><a>Mail    <i class="fa fa-envelope"
+                                                             aria-hidden="true"></i></a> </span>
+                        <span class="icon-bar"><a href="https://www.instagram.com/fibwi/">Instagram    <i class="fa fa-instagram"
+                                                                  aria-hidden="true"></i></a> </span>
+                        <span class="icon-bar"><a href="https://www.youtube.com/channel/UCgNtxbq6ffbgcTyV0U4Jimg">Youtube    <i class="fa fa-youtube-play"
+                                                                aria-hidden="true"></i></a> </span>
+                    </h:button>
+
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- /.container -->
+
+        <!-- jQuery -->
+        <h:outputScript library="js" name="jquery.js"></h:outputScript>
+
+
+        <!-- Bootstrap Core JavaScript -->
+        <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#ir-arriba').click(function () {
+                    $('body, html').animate({
+                        scrollTop: '0px'
+                    }, 300);
+                });
+
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 0) {
+                        $('#ir-arriba').slideDown(300);
+                    } else {
+                        $('#ir-arriba').slideUp(300);
+                    }
+                });
+
+            });
+
+
+
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#tipue_search_input').tipuesearch();
+            });
+        </script>
+
+    </body>
+
+</html>
+

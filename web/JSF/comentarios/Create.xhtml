@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateComentariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_idComentario}" for="idComentario" />
+                    <h:inputText id="idComentario" value="#{comentariosController.selected.idComentario}" title="#{bundle.CreateComentariosTitle_idComentario}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_idComentario}"/>
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_autor}" for="autor" />
+                    <h:inputText id="autor" value="#{comentariosController.selected.autor}" title="#{bundle.CreateComentariosTitle_autor}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_autor}"/>
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_correo}" for="correo" />
+                    <h:inputText id="correo" value="#{comentariosController.selected.correo}" title="#{bundle.CreateComentariosTitle_correo}" />
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_texto}" for="texto" />
+                    <h:inputText id="texto" value="#{comentariosController.selected.texto}" title="#{bundle.CreateComentariosTitle_texto}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_texto}"/>
+                    <h:outputLabel value="#{bundle.CreateComentariosLabel_noriciaId}" for="noriciaId" />
+                    <h:selectOneMenu id="noriciaId" value="#{comentariosController.selected.noriciaId}" title="#{bundle.CreateComentariosTitle_noriciaId}" required="true" requiredMessage="#{bundle.CreateComentariosRequiredMessage_noriciaId}">
+                        <f:selectItems value="#{noticiasController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{comentariosController.create}" value="#{bundle.CreateComentariosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{comentariosController.prepareList}" value="#{bundle.CreateComentariosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateComentariosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

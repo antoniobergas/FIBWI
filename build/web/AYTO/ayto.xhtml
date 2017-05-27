@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+
+
+
+        <h:outputStylesheet library="css" name="ayto.css"></h:outputStylesheet>
+        <f:event type="preRenderView" listener="#{usuariosController.esAyto()}" />
+
+
+    </h:head>
+    <body styleClass="body">
+        <div class="logo">
+            <h:graphicImage value="${pageContext.request.contextPath}/resources/img/iconos/admin-ajax.php-copia.png"/>
+        </div>
+        <div>
+            <h:form styleClass="menu">
+                <p:growl id="messages" showDetail="true"/>
+
+
+
+                <p:menuButton value="Usuario" icon="fa fa-user-circle-o">
+                    <p:menuitem value="Cambiar Contraseña" action= "#{usuariosController.cambiarContrasena()}" update="messages"><i class="fa fa-key" aria-hidden="true"></i></p:menuitem>
+                    <p:menuitem value="Homepage" action="#{usuariosController.irFront()}" />
+                    <p:separator />
+                    <p:menuitem value="Salir"  action="#{usuariosController.cerrarSesion()}">
+                    </p:menuitem>
+
+
+                </p:menuButton>
+
+            </h:form>
+        </div>
+
+        <div class="cajaprincipal">
+            <b:form id="formtit"  >
+                <b:row>
+                    <b:inputText span="5" binding="#{titulo}" required="true"
+                                 label="Titulo">
+                        <f:validateLength maximum="50" />
+
+                    </b:inputText>
+                    <b:inputText span="3" binding="#{firma}" required="true"
+                                 label="Autor">
+                        <f:validateLength maximum="25" />
+                    </b:inputText>
+                </b:row>
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                    <p:outputLabel for="" value="Categorias: " />
+                    <p:selectOneMenu id="desplegable" value="#{noticiasController.categoria.idCategoria}" styleClass="select">
+                        <f:selectItem itemLabel="--Seleccionar--" itemValue="1" />
+                        <f:selectItems value="#{categoriasController.obtenerListaCategorias()}" var="categoria" itemLabel="#{categoria.nombre}"
+                                       itemValue="#{categoria.idCategoria}"
+                                       />
+
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <b:row>
+
+                    <div >
+                        <h3 style="margin-top: 0">Texto</h3>
+                        <p:textEditor widgetVar="editor1" binding="#{texto}"
+                                      styleClass="texto">
+                            <f:validateLength maximum="700"/>
+                        </p:textEditor>
+                        <p:commandButton styleClass="borrar" value="Clear" type="button"
+                                         onclick="PF('editor1').clear();" icon="ui-icon-close" />
+                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade"
+                                  hideEffect="fade">
+                        </p:dialog>
+                    </div>
+
+                    <br />
+
+                    <br />
+
+                    <b:inputText id="tags" tags="true" binding="#{etiquetas}"
+                                 placeholder="Hit enter to create tag" label="Tags" />
+
+
+                </b:row>
+
+                <br />
+
+                <p:fileUpload  fileUploadListener="#{noticiasController.subirImagenes}"
+                               mode="advanced" dragDropSupport="false" update="messages"
+                               sizeLimit="100000" fileLimit="1"
+                               allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  />
+
+                <p:growl id="messages" showDetail="true" />
+
+                <br />
+
+                <p:growl id="message" showDetail="true" />
+
+                <p:commandButton value="Submit" 
+                                 actionListener="#{noticiasController.subirNoticia(firma.value,noticiasController.categoria.idCategoria, titulo.value, texto.value, etiqueta.value, imagen1.jpg, texto.value)}" update="message">
+                    <p:confirm header="Confirmacion" message="Esta Seguro?"
+                               icon="ui-icon-alert" />
+
+                </p:commandButton>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Si" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button"
+                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </b:form>
+        </div>
+    </body>
+</html>

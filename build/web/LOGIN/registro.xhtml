@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous"/>
+        <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
+
+
+    </h:head>
+    <h:body>
+        <div class="logo">
+            <h:graphicImage value="${pageContext.request.contextPath}/resources/img/iconos/admin-ajax.php-copia.png"/>
+        </div>
+        <h:form id="registerForm" style="margin-right: 22%;bottom: 90px;position:relative">
+            <b:container class="container"  style="text-align:center; width:65%; margin-top: 100px;">
+                <b:panel title="Registrarse" look="info" style="text-align: center; position: center; width: 500px;">
+                    <b:row style="margin-left: 50px; margin-right: -200px;">
+                        <b:column medium-screen="2">
+                            <h:outputText value="Usuario:"  />
+                        </b:column>
+                        <b:column medium-screen="4">
+                            <b:inputText placeholder="Usuario" id="username" value="#{usuariosController.current.idUsuarios}" ajax="true" autocomplete="false" update="@(.message)">
+                                <f:facet name="prepend">
+                                    <b:icon name="user" />
+                                </f:facet>
+                            </b:inputText>
+                        </b:column>
+                        <b:column medium-screen="6" styleClass="message">
+                            <b:message for="username" />
+                        </b:column>
+                    </b:row >
+                    <b:row style="margin-left: 50px; margin-right: -200px;">
+                        <b:column medium-screen="2">
+                            <h:outputText value="Email:"  />
+                        </b:column>
+                        <b:column medium-screen="4">
+                            <b:inputText placeholder="usuario@fibwi.es" id="email" value="#{usuariosController.current.email}" ajax="true" autocomplete="false" validatorMessage="el formato del correo no es correto" update="@(.message)">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                <f:facet name="prepend">
+                                    <b:icon name="user" />
+                                </f:facet>
+                            </b:inputText>
+                        </b:column>
+                        <b:column medium-screen="6" styleClass="message">
+                            <b:message for="email" />
+                        </b:column>
+                    </b:row>
+                    <b:row tooltip="" style="margin-left: 50px; margin-right: -200px;">
+                        <b:column medium-screen="2">
+                            <h:outputText value="Contraseña:" />
+                        </b:column>
+                        <b:column medium-screen="4">
+                            <b:inputSecret placeholder="Contraseña" id="password" value="#{usuariosController.current.password}"  binding="#{password}"
+                                           autocomplete="false" update="mensajes">
+                                <f:facet name="prepend">
+                                    <b:iconAwesome name="key" />
+                                </f:facet>
+                            </b:inputSecret>
+
+
+                        </b:column>
+                        <b:messages id="mensajes" medium-screen="6" styleClass="message"/>
+
+                    </b:row>
+
+                    <b:row style="margin-left: 50px; margin-right: -300px; text-align: left;">
+                        <b:column span="2" offset="2">
+                            <b:commandButton value="Registrarse" actionListener="#{usuariosController.altaUsuario}" action="#{usuariosController.enviarALogin()}" update="@form" look="info"
+                                             style="width:100%; padding: 6px 9px;" />
+                        </b:column>
+                        <b:column span="2">
+
+                        </b:column>
+                    </b:row>
+                    
+                </b:panel>
+            </b:container>
+        </h:form>
+    </h:body>
+</html>
